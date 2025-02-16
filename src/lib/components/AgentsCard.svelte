@@ -9,6 +9,7 @@
   <div class="card-body bg-base-200">
     <h2 class="card-title">
       {props.title}
+      <div class="tooltip cursor-pointer" data-tip={props.datatip}>
       {#if props.role.toLowerCase() === "initiator"}
         <div class="badge badge-success">
           <p>Initiator</p>
@@ -26,6 +27,7 @@
           <p>Sentinel</p>
         </div>
       {/if}
+      </div>
     </h2>
     <p>{props.description}</p>
   </div>

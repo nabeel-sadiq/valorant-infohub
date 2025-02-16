@@ -10,6 +10,10 @@ export async function load() {
     );
 
     skins = skins.filter(
+      (skin) => !skin.displayName.toLowerCase().startsWith("random favorite")
+    );
+
+    skins = skins.filter(
       (skin) => skin.displayName.toLowerCase() !== "melee"
     )
 

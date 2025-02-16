@@ -50,6 +50,7 @@
             .includes(searchQuery.toLowerCase())
             ? "hidden"
             : ""}
+          datatip={agent.role.description}
           title={agent.displayName}
           description={agent.description}
           role={agent.role.displayName}

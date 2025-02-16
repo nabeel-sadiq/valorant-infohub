@@ -1,18 +1,18 @@
 /** @type {import('./$types').PageServerLoad} */
 export async function load() {
   try {
-    const response = await fetch("https://valorant-api.com/v1/weapons");
+    const response = await fetch("https://valorant-api.com/v1/agents");
     const data = await response.json();
-    let weapons = data.data;
+    let agents = data.data;
 
     return {
-      weapons: weapons,
+      agents: agents,
     };
   } catch (err) {
     console.log(err);
 
     return {
-      error: "Error: Could not load weapons.",
+      error: "Error: Could not load agents.",
     };
   }
 }

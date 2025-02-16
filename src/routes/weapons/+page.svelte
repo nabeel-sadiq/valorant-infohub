@@ -3,25 +3,54 @@
 
   import Card from "$lib/components/Card.svelte";
   let modal = $state();
+  let searchQuery = $state("");
   let selectedWeapon = $state(null);
 </script>
 
 {#if data.error}
-  <h1>Error, Sorry.</h1>
+  <h1>{data.error}.</h1>
 {:else}
-  <div class="py-6 px-12">
+  <div class="py-12 px-12 flex flex-col gap-4 justify-center items-center">
     <h1 class="text-3xl font-bold">Weapons</h1>
+    <!-- search -->
+    <label class="input">
+      <svg
+        class="h-[1em] opacity-50"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        ><g
+          stroke-linejoin="round"
+          stroke-linecap="round"
+          stroke-width="2.5"
+          fill="none"
+          stroke="currentColor"
+          ><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"
+          ></path></g
+        ></svg
+      >
+      <input
+        bind:value={searchQuery}
+        type="search"
+        class="grow"
+        placeholder="Search Weapons"
+      />
+    </label>
   </div>
   <div class="flex flex-wrap justify-center gap-6 p-4">
     {#each data.weapons as weapon}
-      <Card
-        onclick={() => {
-          selectedWeapon = weapon;
-          modal.showModal();
-        }}
-        title={weapon.displayName}
-        image={weapon.displayIcon}
-      />
+      <div class="tooltip" data-tip="Click to see stats">
+        <Card
+          class={!weapon.displayName.toLowerCase().includes(searchQuery.toLowerCase())
+            ? "hidden"
+            : ""}
+          onclick={() => {
+            selectedWeapon = weapon;
+            modal.showModal();
+          }}
+          title={weapon.displayName}
+          image={weapon.displayIcon}
+        />
+      </div>
     {/each}
 
     <!-- dialog -->

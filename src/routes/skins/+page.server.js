@@ -5,13 +5,13 @@ export async function load() {
     const data = await response.json();
     let skins = data.data;
 
-    skins = skins.filter((skin) =>
-      skin.displayName.toLowerCase().includes("odin")
-    );
-
     skins = skins.filter(
       (skin) => !skin.displayName.toLowerCase().startsWith("standard")
     );
+
+    skins = skins.filter(
+      (skin) => skin.displayName.toLowerCase() !== "melee"
+    )
 
     return {
       skins: skins,
@@ -20,7 +20,7 @@ export async function load() {
     console.log(err);
 
     return {
-      error: "Error could not load skins.",
+      error: "Error: Could not load skins.",
     };
   }
 }
